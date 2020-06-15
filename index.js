@@ -62,11 +62,11 @@ VirtualModulesPlugin.prototype.writeModule = function(filePath, contents) {
   }
 
   finalInputFileSystem._writeVirtualFile(modulePath, stats, contents);
-  if (finalWatchFileSystem && finalWatchFileSystem.watcher.fileWatchers.length) {
-    finalWatchFileSystem.watcher.fileWatchers.forEach(function(fileWatcher) {
-      if (fileWatcher.path === modulePath) {
+  if (finalWatchFileSystem && finalWatchFileSystem.watcher.watchers.length) {
+    finalWatchFileSystem.watcher.watchers.forEach(function(watcher) {
+      if (watcher.path === modulePath) {
         debug(self._compiler.name, "Emit file change:", modulePath, time);
-        fileWatcher.emit("change", time, null);
+        watcher.emit("change", time, null);
       }
     });
   }
